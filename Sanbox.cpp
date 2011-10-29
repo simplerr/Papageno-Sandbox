@@ -69,6 +69,22 @@ void Sandbox::update(float dt)
 	else if(!mWorld->GetPaused())	// The dynamic state of the sandbox
 		dynamicUpdate(dt);
 
+	if(gDInput->keyPressed(DIK_1))	{
+		createBody(gDInput->getCursorPos().x, gDInput->getCursorPos().y, 50, 50);
+	}
+	else if(gDInput->keyPressed(DIK_2))	{
+		createBody(gDInput->getCursorPos().x, gDInput->getCursorPos().y, 100, 100);
+	}
+	else if(gDInput->keyPressed(DIK_3))	{
+		createBody(gDInput->getCursorPos().x, gDInput->getCursorPos().y, 200, 200);
+	}
+	else if(gDInput->keyPressed(DIK_4))	{
+		createBody(gDInput->getCursorPos().x, gDInput->getCursorPos().y, 50, 100);
+	}
+	else if(gDInput->keyPressed(DIK_5))	{
+		createBody(gDInput->getCursorPos().x, gDInput->getCursorPos().y, 100, 200);
+	}
+
 	if(gDInput->keyPressed(DIK_ESCAPE))
 		callback(MENU);
 }
@@ -215,11 +231,18 @@ void Sandbox::draw()
 
 void Sandbox::mouseBox()
 {
-	RigidBody body = RigidBody(mMouseBox.getBox());
+	Rect box = mMouseBox.getBox();
+	createBody(box.getPos().x, box.getPos().y, box.getWidth(), box.getHeight());
+}
+
+void Sandbox::createBody(float x, float y, int width, int height)
+{
+	RigidBody body = RigidBody(x, y, width, height);
+	body.setTexture("imgs\\box1.bmp");	// :HACK: Texture is suppose to be NULL, but it isnt :S
 	int area = body.getWidth() * body.getHeight();
 	if(area > 400)
 	{
-		RigidBody* newBody = new RigidBody(mMouseBox.getBox());
+		RigidBody* newBody = new RigidBody(x, y, width, height);
 		float mass = newBody->getWidth() * newBody->getHeight() * 0.005;
 
 		if(mass < 50)

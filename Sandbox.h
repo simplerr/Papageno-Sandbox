@@ -22,6 +22,7 @@ public:
 
 	void stateChange();
 
+	void createBody(float x, float y, int width, int height);
 	void mouseBox();
 private:
 	World* mWorld;
