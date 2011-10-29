@@ -41,6 +41,7 @@ RigidBody::RigidBody(Rect rect)
 
 	setStatic(false);
 	mAlive = true;
+	mTexture = NULL;
 
 	SetMass(1);
 	SetVelocity(0, 0);
@@ -56,7 +57,9 @@ RigidBody::~RigidBody()
 {
 	// Dtor
 	delete mShape;
-	ReleaseCOM(mTexture);
+
+	if(mTexture != NULL)
+		ReleaseCOM(mTexture);
 }
 
 void RigidBody::setTexture(string textureSource)

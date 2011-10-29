@@ -10,6 +10,7 @@
 
 #define DIRectINPUT_VERSION 0x0800
 #include <dinput.h>
+#include "d3dUtil.h"
 
 class Vector;
 
@@ -65,7 +66,7 @@ private:
 	DIMOUSESTATE2        mMouseState;
 	DIMOUSESTATE2        mLastMouseState;
 
-	//IDirect3DTexture9*	mCursorTexture;
+	IDirect3DTexture9*	mCursorTexture;
 
 	float				mCursorX;
 	float				mCursorY;

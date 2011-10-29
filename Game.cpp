@@ -55,6 +55,9 @@ Game::Game(HINSTANCE hInstance, std::string caption, int width, int height, D3DD
 
 	mCurrentState = new MainMenu();
 	mCurrentState->connect(&Game::changeState, this);
+
+	ShowCursor(false);
+	gd3dDevice->ShowCursor(true);
 }
 	
 Game::~Game()
@@ -135,18 +138,20 @@ void Game::draw()
 	// Even for none sprites this means that everthing gets drawn in screen coordinates
 	gGraphics->getSpriteHandler()->Begin(D3DXSPRITE_ALPHABLEND);
 
+	mCurrentState->draw();
+
 	// FPS hud
 	mGfxStats->display();
 
-	mCurrentState->draw();
-
 	//gGraphics->drawHollowCircle(mBackgroundTexture, 400, 300, 200, 100);
+
+	// Cursor
+	gDInput->drawCursor();
 
 	gGraphics->getSpriteHandler()->Flush();
 	gGraphics->getSpriteHandler()->End();
 
-	// Rendering af all textured quads
-	gDInput->drawCursorPos();
+	// Rendering af all none-sprites
 
 	HR(gd3dDevice->EndScene());
 

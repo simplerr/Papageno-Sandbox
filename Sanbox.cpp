@@ -215,11 +215,12 @@ void Sandbox::draw()
 
 void Sandbox::mouseBox()
 {
-	RigidBody* body = new RigidBody(mMouseBox.getBox());
-	int area = body->getWidth() * body->getHeight();
+	RigidBody body = RigidBody(mMouseBox.getBox());
+	int area = body.getWidth() * body.getHeight();
 	if(area > 400)
 	{
-		float mass = body->getWidth() * body->getHeight() * 0.005;
+		RigidBody* newBody = new RigidBody(mMouseBox.getBox());
+		float mass = newBody->getWidth() * newBody->getHeight() * 0.005;
 
 		if(mass < 50)
 			mass = 50;
@@ -232,18 +233,16 @@ void Sandbox::mouseBox()
 		else
 			mass = 600;
 
-		body->SetMass(mass);
+		newBody->SetMass(mass);
 
 		int random =  rand() % 2;
 		if(random == 1)
-			body->setTexture("imgs\\box1.bmp");
+			newBody->setTexture("imgs\\box1.bmp");
 		else if(random == 0)
-			body->setTexture("imgs\\box2.bmp");
+			newBody->setTexture("imgs\\box2.bmp");
 
-		mWorld->Add(body);
+		mWorld->Add(newBody);
 	}
-	else
-		delete body;
 
 	mActiveBody = NULL;
 }

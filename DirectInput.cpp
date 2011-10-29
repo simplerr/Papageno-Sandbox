@@ -36,7 +36,7 @@ DirectInput::DirectInput(HWND hwnd, DWORD keyboardCoopFlags, DWORD mouseCoopFlag
 	mCursorX = mousePos.x;
 	mCursorY = mousePos.y;
 
-	//mCursorTexture = gGraphics->loadTexture("misc\\textures\\cursor.bmp");
+	mCursorTexture = gGraphics->loadTexture("imgs\\cursor.bmp");
 }
 
 DirectInput::~DirectInput()
@@ -46,7 +46,7 @@ DirectInput::~DirectInput()
 	mMouse->Unacquire();
 	ReleaseCOM(mKeyboard);
 	ReleaseCOM(mMouse);
-	//ReleaseCOM(mCursorTexture);
+	ReleaseCOM(mCursorTexture);
 }
 
 void DirectInput::poll()
@@ -219,7 +219,7 @@ void DirectInput::drawCursorPos(void)
 
 void DirectInput::drawCursor(void)
 {
-	//gGraphics->BlitTexture(mCursorTexture, mCursorX, mCursorY, 32, 32);
+	gGraphics->drawTexture(mCursorTexture, mCursorX+32/2, mCursorY+32/2, 32, 32);
 }
 
 void DirectInput::setCursorX(float x)

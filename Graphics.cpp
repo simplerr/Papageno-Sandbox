@@ -299,6 +299,8 @@ void Graphics::drawRect(Rect Rect, bool solid, D3DCOLOR fillColor)
 		gd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 		  
 	gd3dDevice->DrawPrimitive(D3DPT_TRIANGLEFAN, 0, 2);			
+
+	gd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 }
 
 void Graphics::drawTexture(IDirect3DTexture9 *texture, float x, float y, int width, int height, D3DCOLOR vertexColour, float rotate)
